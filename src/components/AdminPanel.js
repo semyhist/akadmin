@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Card, Form, Button, Col, Row, Alert } from 'react-bootstrap';
+import { Card, Form, Button, Col, Row, Alert, InputGroup } from 'react-bootstrap';
 import { db } from '../config/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { FaUserShield, FaPlusCircle, FaUser, FaClipboardList } from 'react-icons/fa';
 
 const AdminPanel = () => {
   const [selectedAdmin, setSelectedAdmin] = useState('');
@@ -55,35 +56,39 @@ const AdminPanel = () => {
   };
 
   return (
-    <Card className="mt-4">
-      <Card.Header as="h4">Admin Paneli: Puan Ekle</Card.Header>
+    <Card className="card-custom">
+      <Card.Header as="h4"><FaUserShield className="me-2" />ADMIN PANELI</Card.Header>
       <Card.Body>
         {message && <Alert variant="success">{message}</Alert>}
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
-          <Row>
-            <Col md={12}>
-              <Form.Group controlId="adminSelect">
-                <Form.Label>Admin Seç</Form.Label>
-                <Form.Control as="select" value={selectedAdmin} onChange={e => setSelectedAdmin(e.target.value)}>
-                  <option value="">Seçiniz...</option>
-                  {admins.map(admin => <option key={admin} value={admin}>{admin}</option>)}
-                </Form.Control>
-              </Form.Group>
-            </Col>
-            <Col md={12} className="mt-2">
-              <Form.Group controlId="actionSelect">
-                <Form.Label>Eylem Seç</Form.Label>
-                <Form.Control as="select" value={selectedAction} onChange={e => setSelectedAction(e.target.value)}>
-                  <option value="">Seçiniz...</option>
-                  {actions.map(action => <option key={action.name} value={action.name}>{`${action.name} (${action.points})`}</option>)}>
-                </Form.Control>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Button variant="primary" type="submit" className="mt-3 w-100" disabled={loading}>
-            {loading ? 'Ekleniyor...' : 'Puanı Ekle'}
-          </Button>
+          <Form.Group className="mb-3" controlId="adminSelect">
+            <Form.Label>Admin Seç</Form.Label>
+            <InputGroup>
+              <InputGroup.Text><FaUser /></InputGroup.Text>
+              <Form.Select value={selectedAdmin} onChange={e => setSelectedAdmin(e.target.value)} className="form-select-custom">
+                <option value="">Seçiniz...</option>
+                {admins.map(admin => <option key={admin} value={admin}>{admin}</option>)}
+              </Form.Select>
+            </InputGroup>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="actionSelect">
+            <Form.Label>Eylem Seç</Form.Label>
+            <InputGroup>
+              <InputGroup.Text><FaClipboardList /></InputGroup.Text>
+              <Form.Select value={selectedAction} onChange={e => setSelectedAction(e.target.value)} className="form-select-custom">
+                <option value="">Seçiniz...</option>
+                {actions.map(action => <option key={action.name} value={action.name}>{`${action.name} (${action.points})`}</option>)}>
+              </Form.Select>
+            </InputGroup>
+          </Form.Group>
+
+          <div className="d-grid">
+            <Button variant="primary" type="submit" className="btn-primary-custom" disabled={loading}>
+              {loading ? 'Ekleniyor...' : <><FaPlusCircle className="me-2" /> Puanı Ekle</>}
+            </Button>
+          </div>
         </Form>
       </Card.Body>
     </Card>

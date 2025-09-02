@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { Container, Form, Button, Card, Alert } from 'react-bootstrap';
+import { Container, Form, Button, Card, Alert, InputGroup } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { FaEnvelope, FaLock, FaSignInAlt } from 'react-icons/fa';
+import '../Login.css';
 
 const Login = () => {
   const emailRef = useRef();
@@ -19,34 +21,44 @@ const Login = () => {
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       navigate('/');
-    } catch {
-      setError('Failed to log in. Check your email and password.');
+    } catch (err) {
+      setError(`Giriş başarısız: ${err.message}`);
     }
     setLoading(false);
   }
 
   return (
-    <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
-      <Card style={{ width: '30rem' }}>
-        <Card.Body>
-          <h2 className="text-center mb-4">Arka Kanat F1 Lig Portalı</h2>
-          {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            <Button disabled={loading} className="w-100 mt-3" type="submit">
-              Giriş Yap
-            </Button>
-          </Form>
-        </Card.Body>
-      </Card>
-    </Container>
+    <div className="login-container">
+      <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
+        <Card className="card-custom login-card animated-fade-in">
+          <Card.Header as="h2" className="text-center border-0">
+            ARKA KANAT F1 LİG PORTALI
+          </Card.Header>
+          <Card.Body>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group id="email" className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text><FaEnvelope /></InputGroup.Text>
+                  <Form.Control type="email" ref={emailRef} required className="form-control-custom" placeholder="admin@arkakanat.com" />
+                </InputGroup>
+              </Form.Group>
+              <Form.Group id="password" className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <InputGroup>
+                  <InputGroup.Text><FaLock /></InputGroup.Text>
+                  <Form.Control type="password" ref={passwordRef} required className="form-control-custom" placeholder="******" />
+                </InputGroup>
+              </Form.Group>
+              <Button disabled={loading} className="w-100 mt-4 btn-primary-custom" type="submit">
+                <FaSignInAlt className="me-2" /> Giriş Yap
+              </Button>
+            </Form>
+          </Card.Body>
+        </Card>
+      </Container>
+    </div>
   );
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Container, Button } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { FaSignOutAlt } from 'react-icons/fa';
 
 const AppNavbar = () => {
   const { logout } = useAuth();
@@ -12,18 +13,19 @@ const AppNavbar = () => {
       await logout();
       navigate('/login');
     } catch {
-      // Handle logout error if needed
       console.error("Failed to log out");
     }
   }
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar variant="dark" expand="lg" className="navbar-custom">
       <Container>
-        <Navbar.Brand href="/">Admin Ligi</Navbar.Brand>
-        <Navbar.Toggle />
+        <Navbar.Brand href="/" className="navbar-brand">ARKA KANAT F1 LİGİ</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">
-          <Button variant="outline-light" onClick={handleLogout}>Çıkış Yap</Button>
+          <Button variant="primary" onClick={handleLogout} className="btn-primary-custom">
+            <FaSignOutAlt /> Çıkış Yap
+          </Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>

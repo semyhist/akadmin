@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css'; // Import custom styles
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
