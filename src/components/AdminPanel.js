@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import { Card, Form, Button, Col, Row, Alert, InputGroup } from 'react-bootstrap';
+import { Card, Form, Button, Alert, InputGroup } from 'react-bootstrap';
 import { db } from '../config/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { FaUserShield, FaPlusCircle, FaUser, FaClipboardList } from 'react-icons/fa';

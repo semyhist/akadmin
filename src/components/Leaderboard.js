@@ -32,7 +32,7 @@ const Leaderboard = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [allAdmins]);
 
   const getRowClass = (index) => {
     if (index === 0) return 'table-first-place';
