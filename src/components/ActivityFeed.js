@@ -58,6 +58,7 @@ const ActivityFeed = () => {
             <div>
               {renderIcon(activity.action)}
               <strong>{activity.admin}</strong> {activity.action}
+              {activity.description && <p className="mb-0 text-light"><small>{activity.description}</small></p>}
             </div>
             {renderPointsBadge(activity.points)}
           </ListGroup.Item>

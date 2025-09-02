@@ -11,6 +11,7 @@ const AdminPanel = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [description, setDescription] = useState('');
 
   const admins = ['Aydın', 'Azra', 'Melih', 'Nisa', 'Taha', 'Yağız', 'Yankı', 'Yunus'];
   const actions = [
@@ -43,6 +44,7 @@ const AdminPanel = () => {
         admin: selectedAdmin,
         action: actionDetails.name,
         points: actionDetails.points,
+        description: description,
         createdAt: serverTimestamp(),
       });
       setMessage(`Başarıyla ${selectedAdmin} için ${actionDetails.points} puan eklendi.`);
@@ -83,6 +85,11 @@ const AdminPanel = () => {
                 {actions.map(action => <option key={action.name} value={action.name}>{`${action.name} (${action.points})`}</option>)}>
               </Form.Select>
             </InputGroup>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="description">
+            <Form.Label>Açıklama (opsiyonel)</Form.Label>
+            <Form.Control as="textarea" rows={3} value={description} onChange={e => setDescription(e.target.value)} />
           </Form.Group>
 
           <div className="d-grid">
