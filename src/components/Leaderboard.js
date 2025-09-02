@@ -8,7 +8,7 @@ const Leaderboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const allAdmins = ['Aydın', 'Azra', 'Melih', 'Nisa', 'Taha', 'Yağız', 'Yankı', 'Yunus'];
+    const allAdmins = ['Aydın', 'Azra', 'Melih', 'Nisa', 'Taha', 'Yağız', 'Yankı', 'Yunus','Furkan','Gencer'];
     const q = query(collection(db, 'activities'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const points = allAdmins.reduce((acc, admin) => {
