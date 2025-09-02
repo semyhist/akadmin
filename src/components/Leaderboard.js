@@ -6,9 +6,9 @@ import { collection, query, onSnapshot } from 'firebase/firestore';
 const Leaderboard = () => {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
-  const allAdmins = ['Aydın', 'Azra', 'Melih', 'Nisa', 'Taha', 'Yağız', 'Yankı', 'Yunus'];
 
   useEffect(() => {
+    const allAdmins = ['Aydın', 'Azra', 'Melih', 'Nisa', 'Taha', 'Yağız', 'Yankı', 'Yunus'];
     const q = query(collection(db, 'activities'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const points = allAdmins.reduce((acc, admin) => {
@@ -32,7 +32,7 @@ const Leaderboard = () => {
     });
 
     return () => unsubscribe();
-  }, [allAdmins]);
+  }, []);
 
   const getRowClass = (index) => {
     if (index === 0) return 'table-first-place';
